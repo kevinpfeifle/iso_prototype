@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=4 uid="uid://118ojh8vrpou"]
+
+[ext_resource type="Script" path="res://scripts/level_state.gd" id="1_3yprb"]
+[ext_resource type="TileSet" uid="uid://d1vb72ml0f5re" path="res://assets/sprites/tiles/tileset.tres" id="1_7r87w"]
+[ext_resource type="PackedScene" uid="uid://bqikn3an6nb3b" path="res://scenes/units/knight.tscn" id="2_aw5p8"]
+[ext_resource type="Script" path="res://scripts/tile_map_layer.gd" id="2_itg42"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_3yprb")
+
+[node name="GroundLayer" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wEAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAEAAQAAAAAAAAAAAP//AQAAAAAAAAAAAAIAAQABAAAAAAAAAP7/AQABAAAAAAABAAAAAQABAAAAAAD//wAAAQABAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wEAAQAAAAAAAAD+////AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP//AQAAAAAAAAABAAEAAQAAAAAAAAACAAAAAQABAAAAAAABAP7/AQABAAAAAAAAAPz/AQABAAAAAAD///7/AQABAAAAAAD+/wAAAQABAAAAAAD//wIAAQABAAAAAAAAAAQAAQABAAAAAAABAAIAAQABAAAAAAABAAQAAQABAAAAAAD//wQAAQABAAAAAAD+/wIAAQABAAAAAAD+//7/AQABAAAAAAD///z/AQABAAAAAAABAPz/AQABAAAAAAACAP7/AQABAAAAAAACAAIAAQABAAAAAAACAAQAAQABAAAAAAADAAIAAQABAAAAAAADAAAAAQABAAAAAAAAAPr/AQABAAAAAAD9/wAAAQABAAAAAAAAAAYAAQABAAAAAAAAAAgAAQABAAAAAAD//wYAAQABAAAAAAD+/wQAAQABAAAAAAD9/wIAAQABAAAAAAD8/wAAAQABAAAAAAD9//7/AQABAAAAAAD+//z/AQABAAAAAAD///r/AQABAAAAAAAAAPj/AQABAAAAAAABAPr/AQABAAAAAAACAPz/AQABAAAAAAADAP7/AQABAAAAAAAEAAAAAQABAAAAAAABAAMAAQAAAAAAAAABAAUAAQAAAAAAAAACAAMAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAADAP//AQAAAAAAAAACAP//AQAAAAAAAAACAP3/AQAAAAAAAAABAP3/AQAAAAAAAAABAPv/AQAAAAAAAAAAAPv/AQAAAAAAAAAAAPn/AQAAAAAAAAD///n/AQAAAAAAAAD///v/AQAAAAAAAAD+//v/AQAAAAAAAAD+//3/AQAAAAAAAAD9//3/AQAAAAAAAAD9////AQAAAAAAAAD9/wEAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wEAAQAAAAAAAAD8////AQAAAAAAAAD+/wUAAQAAAAAAAAD+/wMAAQAAAAAAAAD//wUAAQAAAAAAAAD//wcAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAcAAQAAAAAAAAABAAYAAQABAAAAAAA=")
+tile_set = ExtResource("1_7r87w")
+script = ExtResource("2_itg42")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(16, 8)
+zoom = Vector2(4, 4)
+
+[node name="Units" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="KnightUnit" parent="Units" instance=ExtResource("2_aw5p8")]
+z_index = 1
+position = Vector2(16, 8)
+scale = Vector2(1.00111, 1)
+
+[node name="KnightUnit2" parent="Units" instance=ExtResource("2_aw5p8")]
+z_index = 1
+position = Vector2(128, 16)
+scale = Vector2(1.00222, 1)
+
+[node name="KnightUnit3" parent="Units" instance=ExtResource("2_aw5p8")]

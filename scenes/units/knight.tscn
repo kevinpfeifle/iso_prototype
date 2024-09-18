@@ -1,0 +1,145 @@
+[gd_scene load_steps=16 format=3 uid="uid://bqikn3an6nb3b"]
+
+[ext_resource type="Texture2D" uid="uid://dvssuddv0as7o" path="res://assets/sprites/units/knight.png" id="1_ccs5k"]
+[ext_resource type="Script" path="res://scripts/units/knight.gd" id="1_td5qh"]
+[ext_resource type="Shader" path="res://assets/shaders/sprite_outline.gdshader" id="2_o2mvh"]
+[ext_resource type="Script" path="res://scripts/units/unit_state_machine.gd" id="3_bv5db"]
+[ext_resource type="Script" path="res://scripts/units/unit_idle_state.gd" id="4_2k5j2"]
+[ext_resource type="Script" path="res://scripts/units/knight/states/knight_selected_state.gd" id="6_gdwdf"]
+[ext_resource type="Script" path="res://scripts/units/unit_move_state.gd" id="7_v1npm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1287b"]
+size = Vector2(15, 16)
+
+[sub_resource type="Gradient" id="Gradient_qygun"]
+offsets = PackedFloat32Array(0.006, 0.355372, 0.72314, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cecpd"]
+gradient = SubResource("Gradient_qygun")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tn8vw"]
+resource_local_to_scene = true
+shader = ExtResource("2_o2mvh")
+shader_parameter/outline_color = Color(0.978812, 0.946939, 0.799474, 1)
+shader_parameter/progress = 0.0
+shader_parameter/width = 0.005
+
+[sub_resource type="Animation" id="Animation_l3c2j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_btd7e"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_8knko"]
+resource_name = "walk"
+length = 1.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnightSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1, 1.23333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhh4y"]
+_data = {
+"RESET": SubResource("Animation_l3c2j"),
+"idle": SubResource("Animation_btd7e"),
+"move": SubResource("Animation_8knko")
+}
+
+[node name="KnightUnit" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "animation_player", "label")]
+collision_mask = 0
+input_pickable = true
+up_direction = Vector2(-0.0648631, -0.997894)
+script = ExtResource("1_td5qh")
+unit_name = "Knight"
+sprite = NodePath("KnightSprite")
+animation_player = NodePath("AnimationPlayer")
+label = NodePath("Label")
+
+[node name="ClickableArea" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -8)
+shape = SubResource("RectangleShape2D_1287b")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0.147854, 0.0875273, 0.216823, 0.647059)
+show_behind_parent = true
+rotation = 0.237365
+scale = Vector2(0.2, 0.2)
+skew = 1.11003
+texture = SubResource("GradientTexture2D_cecpd")
+
+[node name="KnightSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tn8vw")
+position = Vector2(0, -15)
+texture = ExtResource("1_ccs5k")
+hframes = 6
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uhh4y")
+}
+
+[node name="Label" type="Label" parent="."]
+offset_left = 7.0
+offset_top = -16.0
+offset_right = 47.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 6
+text = "Knight"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("3_bv5db")
+current_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+script = ExtResource("4_2k5j2")
+unit = NodePath("../..")
+
+[node name="Selected" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+script = ExtResource("6_gdwdf")
+unit = NodePath("../..")
+
+[node name="Move" type="Node" parent="StateMachine" node_paths=PackedStringArray("unit")]
+script = ExtResource("7_v1npm")
+unit = NodePath("../..")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
