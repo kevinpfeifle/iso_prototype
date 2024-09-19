@@ -1,12 +1,12 @@
 [gd_scene load_steps=16 format=3 uid="uid://bqikn3an6nb3b"]
 
 [ext_resource type="Texture2D" uid="uid://dvssuddv0as7o" path="res://assets/sprites/units/knight.png" id="1_ccs5k"]
-[ext_resource type="Script" path="res://scripts/units/knight.gd" id="1_td5qh"]
+[ext_resource type="Script" path="res://scripts/units/knight/knight.gd" id="1_td5qh"]
 [ext_resource type="Shader" path="res://assets/shaders/sprite_outline.gdshader" id="2_o2mvh"]
-[ext_resource type="Script" path="res://scripts/units/unit_state_machine.gd" id="3_bv5db"]
-[ext_resource type="Script" path="res://scripts/units/unit_idle_state.gd" id="4_2k5j2"]
+[ext_resource type="Script" path="res://scripts/units/state_machine/unit_state_machine.gd" id="3_bv5db"]
+[ext_resource type="Script" path="res://scripts/units/state_machine/states/unit_idle_state.gd" id="4_2k5j2"]
 [ext_resource type="Script" path="res://scripts/units/knight/states/knight_selected_state.gd" id="6_gdwdf"]
-[ext_resource type="Script" path="res://scripts/units/unit_move_state.gd" id="7_v1npm"]
+[ext_resource type="Script" path="res://scripts/units/state_machine/states/unit_move_state.gd" id="7_v1npm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1287b"]
 size = Vector2(15, 16)
