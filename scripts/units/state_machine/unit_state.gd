@@ -1,6 +1,9 @@
 class_name UnitState
 extends Node
 
+## UnitState is an abstract class. It shouldn't be attached to any Nodes.
+
+@warning_ignore("unused_signal") # The children of UnitState consume this. 
 signal transition(new_state: StringName, args: Array) # args is optional, if the state needs it.
 
 @export var unit: Unit

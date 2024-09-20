@@ -4,6 +4,15 @@ extends CharacterBody2D
 @export var unit_name: String
 @export var sprite: Sprite2D
 @export var animation_player: AnimationPlayer
+@export var health_tracker: Sprite2D
+@export var health: int:
+	set(new_health):
+		health = new_health
+		if (health_tracker != null):
+			health_tracker.frame = health
+@export var attack_damage: int
+
+# Temp export for debugging.
 @export var label: Label
 
 @onready var ground_layer = %GroundLayer
@@ -26,6 +35,7 @@ func _ready():
 	hovered = false
 	label.text = unit_name
 	label.visible = false
+	health_tracker.visible = false
 			
 func _physics_process(_delta):
 	if position != Vector2(cur_tile.game_coords):
@@ -42,10 +52,12 @@ func _physics_process(_delta):
 func _on_mouse_entered():
 	label.visible = true
 	hovered = true
+	health_tracker.visible = true
 
 func _on_mouse_exited():
 	label.visible = false
 	hovered = false
+	health_tracker.visible = false
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_pressed():

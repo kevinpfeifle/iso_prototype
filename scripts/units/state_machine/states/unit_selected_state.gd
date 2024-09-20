@@ -14,6 +14,7 @@ func enter(args: Array) -> void:
 func exit() -> void:
 	super()
 	unit.sprite.material.set_shader_parameter("progress", 0) # Remove the outline.
+	unit.unselected.disconnect(_on_unit_unselected)
 
 # TODO: THIS WHOLE THING MIGHT BE THROWN OUT.
 # Perhaps opt for the current selected unit to be saved by the root scene, and have a button to cancel
@@ -25,13 +26,22 @@ func _unhandled_input(event):
 		# still easier than checking coords... there must be a better way?
 		if not unit.hovered and not is_marked_tile_hovered():
 			transition.emit("Idle", [])
+		elif unit.hovered:
+			transition.emit("Targeting", [])
 
 func is_marked_tile_hovered():
 	for tile in marked_tiles:
 		if tile.marked() and tile.marker.hovered:
 			return true
 	return false
-	
+
+## Returns a hovered tile if there is one. This can constantly change, so it can't be saved.
+# func get_hovered_marked_tile():
+# 	for tile in marked_tiles:
+# 		if tile.marked() and tile.marker.hovered:
+# 			return tile
+# 	return null
+
 func _on_unit_unselected():
 	transition.emit("Idle", [])
 	
