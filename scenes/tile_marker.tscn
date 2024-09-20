@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://0wenwmyc16cn"]
+[gd_scene load_steps=8 format=3 uid="uid://0wenwmyc16cn"]
 
 [ext_resource type="Texture2D" uid="uid://t6j7jwf5ovq2" path="res://assets/sprites/tiles/block_selection.png" id="1_478t2"]
 [ext_resource type="Script" path="res://scripts/tiles/tile_marker.gd" id="2_inedu"]
@@ -50,17 +50,34 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_mj7qb"]
+resource_name = "targeted"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h5r5f"]
 _data = {
 "RESET": SubResource("Animation_i8q4b"),
 "blocked": SubResource("Animation_kpjd8"),
-"selected": SubResource("Animation_1xnmc")
+"selected": SubResource("Animation_1xnmc"),
+"targeted": SubResource("Animation_mj7qb")
 }
 
 [node name="TileMarker" type="Sprite2D" node_paths=PackedStringArray("animation_player")]
 texture = ExtResource("1_478t2")
 hframes = 2
-vframes = 2
+vframes = 3
 script = ExtResource("2_inedu")
 animation_player = NodePath("AnimationPlayer")
 

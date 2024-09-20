@@ -3,7 +3,7 @@ extends Sprite2D
 
 @export var animation_player: AnimationPlayer
 
-enum Variant { SELECTED, BLOCKED }
+enum Variant { SELECTED, BLOCKED, TARGETED }
 
 signal clicked(tile: Tile, variant: Variant)
 
@@ -15,13 +15,14 @@ var variant: Variant:
 var hovered: bool
 
 func start_animation():
+	animation_player.speed_scale = 0.75
 	match variant:
 		Variant.SELECTED:
 			animation_player.play("selected")
-			animation_player.speed_scale = 0.75
 		Variant.BLOCKED:
 			animation_player.play("blocked")
-			animation_player.speed_scale = 0.75
+		Variant.TARGETED:
+			animation_player.play("targeted")
 
 func _on_mouse_entered():
 	hovered = true
@@ -31,5 +32,5 @@ func _on_mouse_exited():
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_pressed():
-		if variant == Variant.SELECTED:
+		if [Variant.SELECTED, Variant.TARGETED].has(variant):
 			clicked.emit(get_parent(), variant)
