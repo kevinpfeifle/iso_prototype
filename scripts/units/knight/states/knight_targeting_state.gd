@@ -27,7 +27,12 @@ func remove_neighbor_tiles_targetable():
 	for tile in marked_tiles:
 		tile.remove_marker()
 	marked_tiles = []
-
+	get_tree()
+# This has an issue where clicking on a Unit in the region where it overlaps a tile results in
+# the unit getting selected for targeting, and then immediately the click registers on the tile,
+# firing this function.
+# TODO: Find a better way to handle the clicking so the event gets consumed after its handled once.
+# get_viewport().set_input_as_handled() might accomplish this? This might fix a lot of the weirdness!
 func _on_selected_tile_clicked(tile: Tile, variant: Variant):
 	if variant == TileMarker.Variant.TARGETED:
 		transition.emit("attack", [tile])

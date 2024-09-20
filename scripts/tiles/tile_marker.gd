@@ -34,3 +34,4 @@ func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_pressed():
 		if [Variant.SELECTED, Variant.TARGETED].has(variant):
 			clicked.emit(get_parent(), variant)
+			get_viewport().set_input_as_handled()

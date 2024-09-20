@@ -18,6 +18,9 @@ extends CharacterBody2D
 @onready var ground_layer = %GroundLayer
 
 signal clicked()
+
+## This signal is consumed in one of the Unit State classes.
+@warning_ignore("unused_signal") 
 signal unselected()
 
 var SPEED = 75.00
@@ -50,15 +53,16 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _on_mouse_entered():
-	label.visible = true
+	# label.visible = true
 	hovered = true
 	health_tracker.visible = true
 
 func _on_mouse_exited():
-	label.visible = false
+	# label.visible = false
 	hovered = false
 	health_tracker.visible = false
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event.is_pressed():
 		clicked.emit()
+		get_viewport().set_input_as_handled()
