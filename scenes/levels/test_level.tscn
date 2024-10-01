@@ -17,7 +17,7 @@ script = ExtResource("2_itg42")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 8)
-zoom = Vector2(8, 8)
+zoom = Vector2(4, 4)
 
 [node name="PlayerUnits" type="Node" parent="."]
 unique_name_in_owner = true

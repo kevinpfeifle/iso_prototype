@@ -32,11 +32,16 @@ var hovered: bool
 func _ready():	
 	if not ground_layer.is_node_ready():
 		await ground_layer.ready
+
 	var current_tile_pos = ground_layer.local_to_map(position)
 	cur_tile = ground_layer.tile_coords[current_tile_pos]
 	prev_tile = null
 	cur_tile.occupant = self
 	
+	if position.x >= 0:
+		sprite.scale.x = -1
+	else:
+		sprite.scale.x = 1
 	hovered = false
 	label.text = unit_name
 	label.visible = false
