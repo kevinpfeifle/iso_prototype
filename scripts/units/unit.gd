@@ -30,6 +30,8 @@ var prev_tile: Tile
 var hovered: bool
 
 func _ready():	
+	if not ground_layer.is_node_ready():
+		await ground_layer.ready
 	var current_tile_pos = ground_layer.local_to_map(position)
 	cur_tile = ground_layer.tile_coords[current_tile_pos]
 	prev_tile = null

@@ -22,7 +22,10 @@ func _ready():
 		tile_coords[tile].set_neighbors()
 	
 	# Get the list of units present on this level.
-	for unit in %Units.get_children():
+	for unit in %PlayerUnits.get_children():
+		units.append(unit)
+		
+	for unit in %CompUnits.get_children():
 		units.append(unit)
 
 # TODO: Add this back if you ever need to actually modulate the color of tiles.	

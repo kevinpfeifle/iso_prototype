@@ -17,22 +17,32 @@ script = ExtResource("2_itg42")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(16, 8)
-zoom = Vector2(4, 4)
+zoom = Vector2(8, 8)
 
-[node name="Units" type="Node" parent="."]
+[node name="PlayerUnits" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="KnightUnit" parent="Units" instance=ExtResource("2_aw5p8")]
+[node name="KnightUnit" parent="PlayerUnits" instance=ExtResource("2_aw5p8")]
 z_index = 1
-position = Vector2(16, 8)
+position = Vector2(-80, 24)
 scale = Vector2(1.00111, 1)
-up_direction = Vector2(-0.0648631, -0.997894)
 
-[node name="KnightUnit2" parent="Units" instance=ExtResource("2_aw5p8")]
+[node name="KnightUnit2" parent="PlayerUnits" instance=ExtResource("2_aw5p8")]
 z_index = 1
-position = Vector2(128, 16)
+position = Vector2(-113, 8)
 scale = Vector2(1.00222, 1)
-up_direction = Vector2(-0.0648631, -0.997894)
 
-[node name="KnightUnit3" parent="Units" instance=ExtResource("2_aw5p8")]
-up_direction = Vector2(-0.0648631, -0.997894)
+[node name="KnightUnit3" parent="PlayerUnits" instance=ExtResource("2_aw5p8")]
+position = Vector2(-80, -8)
+
+[node name="CompUnits" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="KnightUnit" parent="CompUnits" instance=ExtResource("2_aw5p8")]
+position = Vector2(112, 24)
+
+[node name="KnightUnit2" parent="CompUnits" instance=ExtResource("2_aw5p8")]
+position = Vector2(112, -8)
+
+[node name="KnightUnit3" parent="CompUnits" instance=ExtResource("2_aw5p8")]
+position = Vector2(145, 8)

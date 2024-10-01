@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var selected_unit: Unit:
+var selected_unit: Unit:
 	set(new_unit):
 		if selected_unit != null and selected_unit != new_unit:
 			selected_unit.unselected.emit()
