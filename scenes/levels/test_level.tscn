@@ -1,13 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://118ojh8vrpou"]
+[gd_scene load_steps=5 format=4 uid="uid://118ojh8vrpou"]
 
-[ext_resource type="Script" path="res://scripts/level_state.gd" id="1_3yprb"]
 [ext_resource type="TileSet" uid="uid://d1vb72ml0f5re" path="res://assets/sprites/tiles/tileset.tres" id="1_7r87w"]
-[ext_resource type="PackedScene" uid="uid://bqikn3an6nb3b" path="res://scenes/units/knight.tscn" id="2_aw5p8"]
 [ext_resource type="Script" path="res://scripts/tiles/tile_map_layer.gd" id="2_itg42"]
 [ext_resource type="PackedScene" uid="uid://cp5xifrei10ia" path="res://scenes/units/skeleton_knight.tscn" id="5_qgtyl"]
+[ext_resource type="PackedScene" uid="uid://dtj5q6rhrn54b" path="res://scenes/player_controller.tscn" id="6_ltlqw"]
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_3yprb")
 
 [node name="GroundLayer" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
@@ -16,40 +14,37 @@ tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wEAAQAAAAAAAAAAAAAAAQABAAA
 tile_set = ExtResource("1_7r87w")
 script = ExtResource("2_itg42")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(16, 8)
-zoom = Vector2(4, 4)
-
-[node name="PlayerUnits" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="KnightUnit" parent="PlayerUnits" instance=ExtResource("2_aw5p8")]
-z_index = 1
-position = Vector2(-80, 24)
-scale = Vector2(1.00111, 1)
-up_direction = Vector2(-0.0648631, -0.997894)
-
-[node name="KnightUnit2" parent="PlayerUnits" instance=ExtResource("2_aw5p8")]
-z_index = 1
-position = Vector2(-113, 8)
-scale = Vector2(1.00222, 1)
-up_direction = Vector2(-0.0648631, -0.997894)
-
-[node name="KnightUnit3" parent="PlayerUnits" instance=ExtResource("2_aw5p8")]
-position = Vector2(-80, -8)
-up_direction = Vector2(-0.0648631, -0.997894)
-
 [node name="CompUnits" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="SkeletonKnightUnit" parent="CompUnits" instance=ExtResource("5_qgtyl")]
+[node name="SkeletonKnightUnit" parent="CompUnits" node_paths=PackedStringArray("active_layer") instance=ExtResource("5_qgtyl")]
 position = Vector2(144, 8)
-up_direction = Vector2(-0.0648631, -0.997894)
+active_layer = NodePath("../../GroundLayer")
 
-[node name="SkeletonKnightUnit2" parent="CompUnits" instance=ExtResource("5_qgtyl")]
+[node name="SkeletonKnightUnit2" parent="CompUnits" node_paths=PackedStringArray("active_layer") instance=ExtResource("5_qgtyl")]
 position = Vector2(112, -8)
-up_direction = Vector2(-0.0648631, -0.997894)
+active_layer = NodePath("../../GroundLayer")
 
-[node name="SkeletonKnightUnit3" parent="CompUnits" instance=ExtResource("5_qgtyl")]
+[node name="SkeletonKnightUnit3" parent="CompUnits" node_paths=PackedStringArray("active_layer") instance=ExtResource("5_qgtyl")]
 position = Vector2(112, 24)
-up_direction = Vector2(-0.0648631, -0.997894)
+active_layer = NodePath("../../GroundLayer")
+
+[node name="PlayerController" parent="." instance=ExtResource("6_ltlqw")]
+position = Vector2(-22, 8)
+
+[node name="Camera2D" parent="PlayerController" index="0"]
+position = Vector2(38, 1)
+
+[node name="KnightUnit" parent="PlayerController/PlayerUnits" index="0" node_paths=PackedStringArray("active_layer")]
+position = Vector2(-80, 24)
+active_layer = NodePath("../../../GroundLayer")
+
+[node name="KnightUnit2" parent="PlayerController/PlayerUnits" index="1" node_paths=PackedStringArray("active_layer")]
+position = Vector2(-112, 8)
+active_layer = NodePath("../../../GroundLayer")
+
+[node name="KnightUnit3" parent="PlayerController/PlayerUnits" index="2" node_paths=PackedStringArray("active_layer")]
+position = Vector2(-80, -8)
+active_layer = NodePath("../../../GroundLayer")
+
+[editable path="PlayerController"]
