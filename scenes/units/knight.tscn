@@ -239,6 +239,7 @@ theme_override_font_sizes/font_size = 6
 text = "Knight"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+unique_name_in_owner = true
 script = ExtResource("3_bv5db")
 current_state = NodePath("Idle")
 

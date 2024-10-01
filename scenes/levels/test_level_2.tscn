@@ -21,17 +21,14 @@ zoom = Vector2(4, 4)
 
 [node name="KnightUnit" parent="PlayerController/PlayerUnits" index="0" node_paths=PackedStringArray("active_layer")]
 position = Vector2(33, 16)
-up_direction = Vector2(-0.0648631, -0.997894)
 active_layer = NodePath("../../../GroundLayer")
 
 [node name="KnightUnit2" parent="PlayerController/PlayerUnits" index="1" node_paths=PackedStringArray("active_layer")]
 position = Vector2(112, 24)
-up_direction = Vector2(-0.0648631, -0.997894)
 active_layer = NodePath("../../../GroundLayer")
 
 [node name="KnightUnit3" parent="PlayerController/PlayerUnits" index="2" node_paths=PackedStringArray("active_layer")]
 position = Vector2(-32, 0)
-up_direction = Vector2(-0.0648631, -0.997894)
 active_layer = NodePath("../../../GroundLayer")
 
 [editable path="PlayerController"]

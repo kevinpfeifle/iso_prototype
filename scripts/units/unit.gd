@@ -24,6 +24,10 @@ signal clicked()
 @warning_ignore("unused_signal") 
 signal unselected()
 
+## This signal is consumed in one of the Unit State classes.
+@warning_ignore("unused_signal") 
+signal resting()
+
 var SPEED = 75.00
 
 var cur_tile: Tile
