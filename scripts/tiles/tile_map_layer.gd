@@ -1,7 +1,7 @@
 extends TileMapLayer
 
 var tile_coords = {}
-var units = []
+# var units = []
 
 func _ready():
 	var local_map = get_used_cells()
@@ -21,12 +21,14 @@ func _ready():
 	for tile in tile_coords.keys():
 		tile_coords[tile].set_neighbors()
 	
+	# TODO: Add this back if the map ever really needs to know what units are on it. At the game's
+	# most simplistic root, it has no need for this.
 	# Get the list of units present on this level.
-	for unit in %PlayerUnits.get_children():
-		units.append(unit)
+	# for unit in %PlayerUnits.get_children():
+	# 	units.append(unit)
 		
-	for unit in %CompUnits.get_children():
-		units.append(unit)
+	# for unit in %CompUnits.get_children():
+	# 	units.append(unit)
 
 # TODO: Add this back if you ever need to actually modulate the color of tiles.	
 #func _use_tile_data_runtime_update(coords: Vector2i) -> bool:

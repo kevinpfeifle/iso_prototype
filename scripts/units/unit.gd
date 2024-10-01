@@ -14,11 +14,9 @@ enum Team { PLAYER, COMP }
 		if (health_tracker != null):
 			health_tracker.frame = health
 @export var attack_damage: int
-
+@export var active_layer: TileMapLayer
 # Temp export for debugging.
 @export var label: Label
-
-@onready var ground_layer = %GroundLayer
 
 signal clicked()
 
@@ -33,11 +31,11 @@ var prev_tile: Tile
 var hovered: bool
 
 func _ready():	
-	if not ground_layer.is_node_ready():
-		await ground_layer.ready
+	if not active_layer.is_node_ready():
+		await active_layer.ready
 
-	var current_tile_pos = ground_layer.local_to_map(position)
-	cur_tile = ground_layer.tile_coords[current_tile_pos]
+	var current_tile_pos = active_layer.local_to_map(position)
+	cur_tile = active_layer.tile_coords[current_tile_pos]
 	prev_tile = null
 	cur_tile.occupant = self
 	
@@ -54,7 +52,7 @@ func _physics_process(_delta):
 	if position != Vector2(cur_tile.game_coords):
 		velocity = position.direction_to(cur_tile.game_coords) * SPEED
 	if position.distance_to(cur_tile.game_coords) > 1:
-		if velocity.x < 0:
+		if velocity.x <= 0:
 			sprite.scale.x = -1
 		else: 
 			sprite.scale.x = 1
