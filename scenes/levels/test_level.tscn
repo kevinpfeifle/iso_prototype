@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://d1vb72ml0f5re" path="res://assets/sprites/tiles/tileset.tres" id="1_7r87w"]
 [ext_resource type="Script" path="res://scripts/tiles/tile_map_layer.gd" id="2_itg42"]
-[ext_resource type="PackedScene" uid="uid://cp5xifrei10ia" path="res://scenes/units/skeleton_knight.tscn" id="5_qgtyl"]
+[ext_resource type="PackedScene" uid="uid://bvk01dq0t0wtw" path="res://scenes/comp_controller.tscn" id="4_emvf6"]
 [ext_resource type="PackedScene" uid="uid://dtj5q6rhrn54b" path="res://scenes/player_controller.tscn" id="6_ltlqw"]
 
 [node name="Level" type="Node2D"]
@@ -14,37 +14,37 @@ tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAD//wEAAQAAAAAAAAAAAAAAAQABAAA
 tile_set = ExtResource("1_7r87w")
 script = ExtResource("2_itg42")
 
-[node name="CompUnits" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="SkeletonKnightUnit" parent="CompUnits" node_paths=PackedStringArray("active_layer") instance=ExtResource("5_qgtyl")]
-position = Vector2(144, 8)
-active_layer = NodePath("../../GroundLayer")
-
-[node name="SkeletonKnightUnit2" parent="CompUnits" node_paths=PackedStringArray("active_layer") instance=ExtResource("5_qgtyl")]
-position = Vector2(112, -8)
-active_layer = NodePath("../../GroundLayer")
-
-[node name="SkeletonKnightUnit3" parent="CompUnits" node_paths=PackedStringArray("active_layer") instance=ExtResource("5_qgtyl")]
-position = Vector2(112, 24)
-active_layer = NodePath("../../GroundLayer")
-
 [node name="PlayerController" parent="." instance=ExtResource("6_ltlqw")]
 position = Vector2(-22, 8)
 
 [node name="Camera2D" parent="PlayerController" index="0"]
 position = Vector2(38, 1)
 
-[node name="KnightUnit" parent="PlayerController/PlayerUnits" index="0" node_paths=PackedStringArray("active_layer")]
+[node name="KnightUnit" parent="PlayerController/Units" index="0" node_paths=PackedStringArray("active_layer")]
 position = Vector2(-80, 24)
 active_layer = NodePath("../../../GroundLayer")
 
-[node name="KnightUnit2" parent="PlayerController/PlayerUnits" index="1" node_paths=PackedStringArray("active_layer")]
-position = Vector2(-112, 8)
-active_layer = NodePath("../../../GroundLayer")
-
-[node name="KnightUnit3" parent="PlayerController/PlayerUnits" index="2" node_paths=PackedStringArray("active_layer")]
+[node name="KnightUnit2" parent="PlayerController/Units" index="1" node_paths=PackedStringArray("active_layer")]
 position = Vector2(-80, -8)
 active_layer = NodePath("../../../GroundLayer")
 
+[node name="KnightUnit3" parent="PlayerController/Units" index="2" node_paths=PackedStringArray("active_layer")]
+position = Vector2(-112, 8)
+active_layer = NodePath("../../../GroundLayer")
+
+[node name="CompController" parent="." instance=ExtResource("4_emvf6")]
+
+[node name="SkeletonKnightUnit" parent="CompController/Units" index="0" node_paths=PackedStringArray("active_layer")]
+position = Vector2(112, -8)
+active_layer = NodePath("../../../GroundLayer")
+
+[node name="SkeletonKnightUnit2" parent="CompController/Units" index="1" node_paths=PackedStringArray("active_layer")]
+position = Vector2(113, 24)
+active_layer = NodePath("../../../GroundLayer")
+
+[node name="SkeletonKnightUnit3" parent="CompController/Units" index="2" node_paths=PackedStringArray("active_layer")]
+position = Vector2(145, 8)
+active_layer = NodePath("../../../GroundLayer")
+
 [editable path="PlayerController"]
+[editable path="CompController"]

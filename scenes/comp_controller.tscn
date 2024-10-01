@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvk01dq0t0wtw"]
+
+[ext_resource type="Script" path="res://scripts/controllers/comp_controller.gd" id="1_6348s"]
+[ext_resource type="PackedScene" uid="uid://cp5xifrei10ia" path="res://scenes/units/skeleton_knight.tscn" id="2_avis2"]
+
+[node name="CompController" type="Node2D"]
+script = ExtResource("1_6348s")
+
+[node name="Units" type="Node" parent="."]
+
+[node name="SkeletonKnightUnit" parent="Units" instance=ExtResource("2_avis2")]
+up_direction = Vector2(-0.0648631, -0.997894)
+
+[node name="SkeletonKnightUnit2" parent="Units" instance=ExtResource("2_avis2")]
+up_direction = Vector2(-0.0648631, -0.997894)
+
+[node name="SkeletonKnightUnit3" parent="Units" instance=ExtResource("2_avis2")]
+up_direction = Vector2(-0.0648631, -0.997894)
