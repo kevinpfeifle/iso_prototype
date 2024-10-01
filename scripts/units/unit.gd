@@ -1,7 +1,10 @@
 class_name Unit
 extends CharacterBody2D
 
+enum Team { PLAYER, COMP }
+
 @export var unit_name: String
+@export var team: Team
 @export var sprite: Sprite2D
 @export var animation_player: AnimationPlayer
 @export var health_tracker: Sprite2D
